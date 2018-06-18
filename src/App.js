@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import { Router,  Route} from 'react-router-dom';
-import './App.css';
 import history from './Components/history'
 
 

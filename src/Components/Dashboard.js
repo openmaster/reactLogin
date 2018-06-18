@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import history from './history'
 import {Card, Icon, Image, Responsive, Segment, Item} from 'semantic-ui-react'
 import axios from 'axios'
+import './Dashboard.css';
 
 class Dashboard extends Component {
 	constructor(props){
@@ -55,7 +56,7 @@ class Dashboard extends Component {
 			<Card.Description>{this.state.province}</Card.Description>
 			</Card.Content>
 			<Card.Content extra>
-			<button className="btn btn-warning " onClick={this.logout}>Logout</button>
+			<button className="btn btn-red " onClick={this.logout}>Logout</button>
 			</Card.Content>
 			</Card>
 			</Responsive>
@@ -75,7 +76,7 @@ class Dashboard extends Component {
         				<p>{this.state.Zipcode}</p>
         				<p>{this.state.province}</p>
         				</Item.Description>
-
+        				<Item.Extra><button className="btn btn-red " onClick={this.logout}>Logout</button></Item.Extra>
       				</Item.Content>
     			</Item>
     			</Item.Group>
