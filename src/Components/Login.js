@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
-import { Button, Form} from 'semantic-ui-react'
+import React from 'react';
+import { Button, Form, Responsive, Segment} from 'semantic-ui-react'
 import axios from 'axios'
+import history from './history'
+
+
 
 class Login extends React.Component {
 	constructor(props){
@@ -9,32 +12,34 @@ class Login extends React.Component {
 			username: '',
 			password: ''
 		};
-
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.loading = false;
 	}
 	
 	
 	handleChange(e){
-		console.log(e);
 		this.setState({[e.target.name]: e.target.value});
 	}
+	
 
 	handleSubmit(e){
-		console.log('hitting submit method');
-		console.log(this.state);
-		this.body = {username: this.state.username, password: this.state.password};
-		axios.post('http://localhost:3200/login', this.body).then(function(result) {
-			console.log(result);
+
+		e.preventDefault();
+		const body = {username: this.state.username, password: this.state.password};
+		axios.post('https://logintes.herokuapp.com/login', body).then(function(result) {
+		  localStorage.setItem("user", JSON.stringify(result.data));
+		  history.push('/dashboard')
 		}).catch(function(err) {
 			console.log(err);
 		});
 	}
 
 	render() {
+
 		return (
-			<div className="container">
-			
+			<Segment.Group>
+			<Responsive as={Segment}>			
 			<Form onSubmit={this.handleSubmit}>
 			<Form.Field>
 			<label>User name</label>
@@ -46,7 +51,8 @@ class Login extends React.Component {
 			</Form.Field>
 			<Button type='submit'>Submit</Button>
 			</Form>
-			</div>
+			</Responsive>
+			</Segment.Group>
 			);
 	}
 }
